@@ -18,6 +18,8 @@
 
 #include "ktimer.h"
 
+#include <time.h>
+
 #include <QProcess>
 #include <QTimer>
 #include <KConfigGroup>
@@ -445,6 +447,16 @@ void KTimerJob::save( KConfig *cfg, const QString& grp )
     groupcfg.writeEntry( "OneInstance", d->oneInstance );
     groupcfg.writeEntry( "Consecutive", d->consecutive );
     groupcfg.writeEntry( "State", (int)d->state );
+    groupcfg.writeEntry( "Value", d->value );
+
+    if (d->state == Started)
+    {
+        groupcfg.writeEntry("Expires", (int)(time(NULL)+d->value));
+    }
+    else
+    {
+        groupcfg.deleteEntry("Expires");
+    }
 }
 
 
@@ -464,6 +476,30 @@ void KTimerJob::load( KConfig *cfg, const QString& grp )
     setOneInstance( groupcfg.readEntry( "OneInstance", d->oneInstance ) );
     setConsecutive( groupcfg.readEntry( "Consecutive", d->consecutive ) );
     setState( (States)groupcfg.readEntry( "State", (int)Stopped ) );
+
+    int expireTime=groupcfg.readEntry( "Expires", (int)0);
+
+    if (expireTime > 0 && state()==Started)
+    {
+        int newValue=expireTime-time(NULL);
+
+        if (newValue > 0)
+        {
+            //There is time left on the countdown.... maybe not much!
+            setValue( newValue );
+        }
+        else
+        {
+            //NB: the time has *EXPIRED* since we were last activated.... does the user still want it to run?
+            //BUG: WIP: expired timers hold there old value on reload.
+            setValue( groupcfg.readEntry("Value", d->delay) );
+        }
+    }
+    else
+    {
+        //The timer position is where we left it.
+        setValue( groupcfg.readEntry("Value", d->delay) );
+    }
 }
 
 
