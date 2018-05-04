@@ -112,6 +112,12 @@ KTimerPref::KTimerPref( QWidget *parent)
     tray->setIconByName(QStringLiteral( "ktimer" ));
     tray->setCategory(KStatusNotifierItem::ApplicationStatus);
     tray->setStatus(KStatusNotifierItem::Active);
+
+    // Set initial visibility states & column widths
+    m_state->hide();
+    m_settings->hide();
+    //DNW: m_list->header()->resizeSection(1, 100);
+
     // set help button gui item
     KGuiItem::assign(m_help,KStandardGuiItem::help());
 
@@ -121,6 +127,7 @@ KTimerPref::KTimerPref( QWidget *parent)
 
     // connect
     connect(m_add, &QPushButton::clicked, this, &KTimerPref::add);
+    connect(m_edit, &QPushButton::clicked, this, &KTimerPref::edit);
     connect(m_remove, &QPushButton::clicked, this, &KTimerPref::remove);
     connect(m_help, &QPushButton::clicked, this, &KTimerPref::help);
     connect(m_list, &QTreeWidget::currentItemChanged, this, &KTimerPref::currentChanged);
@@ -165,8 +172,20 @@ void KTimerPref::add()
 
     m_list->setCurrentItem( item );
     m_list->update();
+    m_settings->show();
 }
 
+void KTimerPref::edit()
+{
+    if (m_settings->isHidden())
+    {
+        m_settings->show();
+    }
+    else
+    {
+        m_settings->hide();
+    }
+}
 
 void KTimerPref::remove()
 {
