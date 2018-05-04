@@ -81,6 +81,7 @@ class KTimerJob : public QObject {
     void pause();
     void stop();
     void start();
+    void toggle();
 
  signals:
     void stateChanged( KTimerJob *job, States state );
@@ -133,6 +134,7 @@ class KTimerPref : public QDialog, public Ui::PrefWidget
     void remove();
     void help();
     void currentChanged( QTreeWidgetItem * , QTreeWidgetItem *);
+    void currentDoubleClicked( QTreeWidgetItem *, int column);
 
     void saveJobs( KConfig *cfg );
     void loadJobs( KConfig *cfg );

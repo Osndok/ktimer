@@ -133,6 +133,7 @@ KTimerPref::KTimerPref( QWidget *parent)
     connect(m_remove, &QPushButton::clicked, this, &KTimerPref::remove);
     connect(m_help, &QPushButton::clicked, this, &KTimerPref::help);
     connect(m_list, &QTreeWidget::currentItemChanged, this, &KTimerPref::currentChanged);
+    connect(m_list, &QTreeWidget::itemDoubleClicked, this, &KTimerPref::currentDoubleClicked);
     loadJobs( KSharedConfig::openConfig().data() );
 
     show();
@@ -285,6 +286,33 @@ void KTimerPref::currentChanged( QTreeWidgetItem *i , QTreeWidgetItem * /* old *
     }
 }
 
+void KTimerPref::currentDoubleClicked( QTreeWidgetItem *i, int column)
+{
+    KTimerJobItem *item = static_cast<KTimerJobItem*>(i);
+    if( item )
+    {
+        item->job()->toggle();
+    }
+}
+
+void KTimerJob::toggle()
+{
+    /*
+    When a user double-clicks a row, what could they be wanting?
+    (1) open the item for editing,
+    (2) toggle the item between started & stopped,
+    (3) toggle the item between started & paused,
+    */
+
+    if (state()==Started)
+    {
+        stop();
+    }
+    else
+    {
+        start();
+    }
+}
 
 void KTimerPref::jobChanged( KTimerJob *job )
 {
