@@ -261,8 +261,8 @@ void KTimerPref::currentChanged( QTreeWidgetItem *i , QTreeWidgetItem * /* old *
         connect(m_stop, &QToolButton::clicked, job, &KTimerJob::stop);
         connect(m_pause, &QToolButton::clicked, job, &KTimerJob::pause);
         connect(m_start, &QToolButton::clicked, job, &KTimerJob::start);
-        connect( m_slider, SIGNAL(valueChanged(int)),
-                 job, SLOT(setValue(int)) );
+
+        connect( m_slider, SIGNAL(sliderMoved(int)), job, SLOT(setValue(int)) );
 
         m_commandLine->lineEdit()->setText( job->command() );
         m_onSchedule->lineEdit()->setText(job->onSchedule());
