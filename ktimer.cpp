@@ -221,9 +221,18 @@ void KTimerPref::currentChanged( QTreeWidgetItem *i , QTreeWidgetItem * /* old *
         m_slider->disconnect();
 		m_commandLine->disconnect();
 		m_commandLine->lineEdit()->disconnect();
-
-        //NB: WIP: No GUI way to set: onSchedule, onPause, onResume, onStop, onSuccess, onFailure
-        //With the current scheme, so many fields would be rather cluttered; so maybe it would require a special dialog?
+		m_onSchedule->disconnect();
+		m_onSchedule->lineEdit()->disconnect();
+		m_onPause->disconnect();
+		m_onPause->lineEdit()->disconnect();
+		m_onResume->disconnect();
+		m_onResume->lineEdit()->disconnect();
+		m_onStop->disconnect();
+		m_onStop->lineEdit()->disconnect();
+		m_onSuccess->disconnect();
+		m_onSuccess->lineEdit()->disconnect();
+		m_onFailure->disconnect();
+		m_onFailure->lineEdit()->disconnect();
 
         // Set hour, minute and second QSpinBoxes before we connect to signals.
         int h, m, s;
@@ -232,8 +241,14 @@ void KTimerPref::currentChanged( QTreeWidgetItem *i , QTreeWidgetItem * /* old *
         m_delayM->setValue( m );
         m_delay->setValue( s );
 
-        connect( m_commandLine->lineEdit(), SIGNAL(textChanged(QString)),
-                 job, SLOT(setCommand(QString)) );
+        connect( m_commandLine->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setCommand(QString)) );
+        connect( m_onSchedule->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setOnSchedule(QString)) );
+        connect( m_onPause->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setOnPause(QString)) );
+        connect( m_onResume->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setOnResume(QString)) );
+        connect( m_onStop->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setOnStop(QString)) );
+        connect( m_onSuccess->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setOnSuccess(QString)) );
+        connect( m_onFailure->lineEdit(), SIGNAL(textChanged(QString)), job, SLOT(setOnFailure(QString)) );
+
         connect(m_delayH, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &KTimerPref::delayChanged);
         connect(m_delayM, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &KTimerPref::delayChanged);
         connect(m_delay, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &KTimerPref::delayChanged);
@@ -246,8 +261,14 @@ void KTimerPref::currentChanged( QTreeWidgetItem *i , QTreeWidgetItem * /* old *
         connect( m_slider, SIGNAL(valueChanged(int)),
                  job, SLOT(setValue(int)) );
 
-
         m_commandLine->lineEdit()->setText( job->command() );
+        m_onSchedule->lineEdit()->setText(job->onSchedule());
+        m_onPause->lineEdit()->setText(job->onPause());
+        m_onResume->lineEdit()->setText(job->onResume());
+        m_onStop->lineEdit()->setText(job->onStop());
+        m_onSuccess->lineEdit()->setText(job->onSuccess());
+        m_onFailure->lineEdit()->setText(job->onFailure());
+
         m_loop->setChecked( job->loop() );
         m_one->setChecked( job->oneInstance() );
         m_consecutive->setChecked( job->consecutive() );
