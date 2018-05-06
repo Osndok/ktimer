@@ -130,6 +130,7 @@ KTimerPref::KTimerPref( QWidget *parent)
     // connect
     connect(m_add, &QPushButton::clicked, this, &KTimerPref::add);
     connect(m_edit, &QPushButton::clicked, this, &KTimerPref::edit);
+    connect(m_done, &QPushButton::clicked, this, &KTimerPref::edit);
     connect(m_remove, &QPushButton::clicked, this, &KTimerPref::remove);
     connect(m_help, &QPushButton::clicked, this, &KTimerPref::help);
     connect(m_list, &QTreeWidget::currentItemChanged, this, &KTimerPref::currentChanged);

@@ -119,6 +119,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
         </property>
@@ -221,6 +224,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
         </property>
@@ -245,6 +251,9 @@
           <width>1</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
@@ -308,6 +317,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
         </property>
@@ -339,6 +351,9 @@
           <width>1</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
@@ -372,6 +387,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
         </property>
@@ -404,6 +422,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="toolTip">
          <string>command you would like to run when time is up</string>
         </property>
@@ -432,7 +453,7 @@
         </property>
        </widget>
       </item>
-      <item row="13" column="8">
+      <item row="13" column="6">
        <widget class="QPushButton" name="m_remove">
         <property name="toolTip">
          <string>Remove a task</string>
@@ -442,6 +463,13 @@
         </property>
         <property name="text">
          <string>&amp;Remove</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="8">
+       <widget class="QPushButton" name="m_done">
+        <property name="text">
+         <string>Done</string>
         </property>
        </widget>
       </item>
@@ -521,6 +549,9 @@
      </item>
      <item>
       <widget class="QSlider" name="m_slider">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="toolTip">
         <string>Speed up or slow down your countdown</string>
        </property>
@@ -585,11 +616,25 @@
  </customwidgets>
  <tabstops>
   <tabstop>m_list</tabstop>
+  <tabstop>m_add</tabstop>
+  <tabstop>m_edit</tabstop>
+  <tabstop>m_start</tabstop>
+  <tabstop>m_pause</tabstop>
+  <tabstop>m_stop</tabstop>
   <tabstop>m_delayH</tabstop>
   <tabstop>m_delayM</tabstop>
   <tabstop>m_delay</tabstop>
+  <tabstop>m_commandLine</tabstop>
+  <tabstop>m_onSchedule</tabstop>
+  <tabstop>m_onPause</tabstop>
+  <tabstop>m_onResume</tabstop>
+  <tabstop>m_onStop</tabstop>
+  <tabstop>m_onSuccess</tabstop>
+  <tabstop>m_onFailure</tabstop>
   <tabstop>m_loop</tabstop>
   <tabstop>m_one</tabstop>
+  <tabstop>m_consecutive</tabstop>
+  <tabstop>m_help</tabstop>
  </tabstops>
  <includes>
   <include location="global">kseparator.h</include>
