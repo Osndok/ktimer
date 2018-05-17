@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>563</width>
+    <width>574</width>
     <height>577</height>
    </rect>
   </property>
@@ -228,10 +228,10 @@
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
-         <string>command you would like to run when time is up</string>
+         <string>command to run when the primary command exits with a failure (non-zero) value/status</string>
         </property>
         <property name="whatsThis">
-         <string>Enter a program you would like to run when the countdown is zero</string>
+         <string>command to run when the primary command exits with a failure (non-zero) value/status</string>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -256,10 +256,10 @@
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
-         <string>command you would like to run when time is up</string>
+         <string>command to run when the 'play' button is pressed</string>
         </property>
         <property name="whatsThis">
-         <string>Enter a program you would like to run when the countdown is zero</string>
+         <string>command to run when the 'play' button is pressed</string>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -321,10 +321,10 @@
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
-         <string>command you would like to run when time is up</string>
+         <string>command to run when the count-down is resumed</string>
         </property>
         <property name="whatsThis">
-         <string>Enter a program you would like to run when the countdown is zero</string>
+         <string>command to run when the count-down is resumed</string>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -356,10 +356,10 @@
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
-         <string>command you would like to run when time is up</string>
+         <string>command to run when the 'stop' button is pressed</string>
         </property>
         <property name="whatsThis">
-         <string>Enter a program you would like to run when the countdown is zero</string>
+         <string>command to run when the 'stop' button is pressed</string>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -391,10 +391,10 @@
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
-         <string>command you would like to run when time is up</string>
+         <string>command to run when the primary command exits with a success (zero) value/status</string>
         </property>
         <property name="whatsThis">
-         <string>Enter a program you would like to run when the countdown is zero</string>
+         <string>command to run when the primary command exits with a success (zero) value/status</string>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -426,10 +426,10 @@
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="toolTip">
-         <string>command you would like to run when time is up</string>
+         <string>command to run when the 'pause' button is pressed</string>
         </property>
         <property name="whatsThis">
-         <string>Enter a program you would like to run when the countdown is zero</string>
+         <string>command to run when the 'play' button is pressed</string>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
