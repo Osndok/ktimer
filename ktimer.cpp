@@ -36,6 +36,7 @@
 
 class KTimerJobItem : public QTreeWidgetItem {
 public:
+    // NB: 'parent' is 'm_list'
     KTimerJobItem( KTimerJob *job, QTreeWidget *parent )
         : QTreeWidgetItem() {
 			parent->addTopLevelItem(this);
@@ -44,6 +45,7 @@ public:
         update();
     }
 
+    // NB: 'parent' is 'm_list'
     KTimerJobItem( KTimerJob *job, QTreeWidget * parent, QTreeWidgetItem *after )
         : QTreeWidgetItem() {
 			int otherItemIndex = parent->indexOfTopLevelItem(after);
@@ -119,6 +121,9 @@ KTimerPref::KTimerPref( QWidget *parent)
     m_state->hide();
     m_settings->hide();
     //DNW: m_list->header()->resizeSection(1, 100);
+
+    // Until we can optimize it, the 'state' column simply does not have a good cost/benefit.
+    m_list->hideColumn(2);
 
     // set help button gui item
     KGuiItem::assign(m_help,KStandardGuiItem::help());
