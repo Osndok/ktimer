@@ -38,8 +38,9 @@ class KTimerJobItem : public QTreeWidgetItem {
 public:
     // NB: 'parent' is 'm_list'
     KTimerJobItem( KTimerJob *job, QTreeWidget *parent )
-        : QTreeWidgetItem() {
-			parent->addTopLevelItem(this);
+        : QTreeWidgetItem()
+    {
+		parent->addTopLevelItem(this);
         m_job = job;
         m_error = false;
         update();
@@ -68,6 +69,13 @@ public:
 
     void update()
     {
+        // In theory, it would be better for >=10 hour timers if the time columns were right aligned.
+        // ... if only they did not look so ugly as such. :(
+        setTextAlignment(0, Qt::AlignHCenter);
+        setTextAlignment(1, Qt::AlignHCenter);
+        
+        //--
+
         QString value=m_job->formatTime(m_job->value());
         QString delay=m_job->formatTime(m_job->delay());
 
