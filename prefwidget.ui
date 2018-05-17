@@ -553,10 +553,10 @@
         <enum>Qt::ClickFocus</enum>
        </property>
        <property name="toolTip">
-        <string>Speed up or slow down your countdown</string>
+        <string>Blue area indicates time remaining</string>
        </property>
        <property name="whatsThis">
-        <string>You can use this slider to adjust the time.</string>
+        <string>You can drag this slider to manually adjust the time remaining.</string>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
