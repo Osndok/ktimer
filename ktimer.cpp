@@ -66,16 +66,28 @@ public:
         update();
     }
 
-    void update() {
-        setText( 0, m_job->formatTime(m_job->value()) );
+    void update()
+    {
+        QString value=m_job->formatTime(m_job->value());
+        QString delay=m_job->formatTime(m_job->delay());
+
+        if (QString::compare(value, delay))
+        {
+            setText( 0, value );
+        }
+        else
+        {
+            setText( 0, QString(""));
+        }
 
         if( m_error )
             setIcon( 0, QIcon::fromTheme( QStringLiteral( "process-stop" )) );
         else
             setIcon( 0, QPixmap() );
 
-        setText( 1, m_job->formatTime(m_job->delay()) );
+        setText( 1, delay );
 
+        // TODO: it would probably be better to have no icon for the 'stopped' state.
         switch( m_job->state() ) {
             case KTimerJob::Stopped: setIcon( 2, QIcon::fromTheme( QStringLiteral( "media-playback-stop" )) ); break;
             case KTimerJob::Paused: setIcon( 2, QIcon::fromTheme( QStringLiteral( "media-playback-pause" )) ); break;
