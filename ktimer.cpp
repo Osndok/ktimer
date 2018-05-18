@@ -146,6 +146,9 @@ KTimerPref::KTimerPref( QWidget *parent)
     tray->setCategory(KStatusNotifierItem::ApplicationStatus);
     tray->setStatus(KStatusNotifierItem::Active);
 
+	// TODO: Somehow replace the 'are you sure?' nuisance....
+	//KStandardAction::quit(this, SLOT(exit()), tray->d->actionCollection);
+
     // Set initial visibility states & column widths
     m_state->hide();
     m_settings->hide();
