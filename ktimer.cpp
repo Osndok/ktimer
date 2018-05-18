@@ -71,8 +71,8 @@ public:
     {
         // In theory, it would be better for >=10 hour timers if the time columns were right aligned.
         // ... if only they did not look so ugly as such. :(
-        setTextAlignment(0, Qt::AlignHCenter);
-        setTextAlignment(1, Qt::AlignHCenter);
+        setTextAlignment(0, Qt::AlignRight);
+        setTextAlignment(1, Qt::AlignRight);
         
         //--
 
@@ -408,10 +408,14 @@ void KTimerPref::saveJobs( KConfig *cfg )
     jobscfg.sync();
 }
 
-
+// BUG: misnomer... loadConfiguration() ?
 void KTimerPref::loadJobs( KConfig *cfg )
 {
-    const int num = cfg->group("Jobs").readEntry( "Number", 0 );
+	const KConfigGroup main=cfg->group("Jobs");
+	
+	showSeconds=main.readEntry("ShowSeconds", false);
+	
+    const int num = main.readEntry( "Number", 0 );
     for( int n=0; n<num; n++ ) {
             KTimerJob *job = new KTimerJob;
             KTimerJobItem *item = new KTimerJobItem( job, m_list );
@@ -562,7 +566,31 @@ QString KTimerJob::formatTime( int seconds ) const
 {
     int h, m, s;
     secondsToHMS( seconds, &h, &m, &s );
-    return QStringLiteral( "%1:%2:%3" ).arg( h ).arg( m, 2, 10, QLatin1Char( '0' ) ).arg( s,2, 10, QLatin1Char( '0' ) );
+
+	// BUG: how can we get our preferences object here?
+	bool showSeconds=false;
+	
+	if (showSeconds)
+	{
+		//IMO: having a bunch of out-of-sync changing-every-second "doomsday timers" is very distracting, and a bit anxiety provoking.
+    	return QStringLiteral( "%1:%2:%3" ).arg( h ).arg( m, 2, 10, QLatin1Char( '0' ) ).arg( s,2, 10, QLatin1Char( '0' ) );
+	}
+	else
+	if (h)
+	{
+		return QStringLiteral( "%1h%2m" ).arg(h).arg( m, 2, 10, QLatin1Char( '0' ) );
+	}
+	else
+	if (m)
+	{
+		//return QStringLiteral( "%1m" ).arg( m, 2, 10, QLatin1Char( '0' ) );
+		return QStringLiteral( "%1m" ).arg( m );
+	}
+	else
+	{
+		//return QStringLiteral( "%1s" ).arg( s, 2, 10, QLatin1Char( '0' ) );
+		return QStringLiteral( "%1s" ).arg( s );
+	}
 }
 
 

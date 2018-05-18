@@ -147,6 +147,7 @@ class KTimerPref : public QDialog, public Ui::PrefWidget
 
  private:
     struct KTimerPrefPrivate *d;
+	bool showSeconds;
 };
 
 #endif
