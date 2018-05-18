@@ -578,7 +578,7 @@ QString KTimerJob::formatTime( int seconds ) const
 	else
 	if (h)
 	{
-		return QStringLiteral( "%1h%2m" ).arg(h).arg( m, 2, 10, QLatin1Char( '0' ) );
+		return QStringLiteral( "%1h %2m" ).arg(h).arg( m, 2, 10, QLatin1Char( '0' ) );
 	}
 	else
 	if (m)
