@@ -89,9 +89,18 @@ public:
         }
 
         if( m_error )
+        {
             setIcon( 0, QIcon::fromTheme( QStringLiteral( "process-stop" )) );
+        }
         else
+        if ( m_job->state() == KTimerJob::Paused)
+        {
+            setIcon(0, QIcon::fromTheme( QStringLiteral( "media-playback-pause" )));
+        }
+        else
+        {
             setIcon( 0, QPixmap() );
+        }
 
         setText( 1, delay );
 
