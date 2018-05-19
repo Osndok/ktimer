@@ -386,10 +386,24 @@ void KTimerPref::jobFinished( KTimerJob *job, bool error )
 void KTimerPref::delayChanged()
 {
     KTimerJobItem *item = static_cast<KTimerJobItem*>(m_list->currentItem());
-    if ( item ) {
-        KTimerJob *job = item->job();
-        int time_sec = job->timeToSeconds( m_delayH->value(), m_delayM->value(), m_delay->value() );
-        job->setDelay( time_sec );
+    if ( item )
+	{
+		KTimerJob *job = item->job();
+
+		unsigned oldDelay=job->delay();
+		unsigned oldValue=job->value();
+
+		unsigned newDelay = job->timeToSeconds( m_delayH->value(), m_delayM->value(), m_delay->value() );
+		job->setDelay( newDelay );
+
+		//If the value was already maxed-out, keep it that way.
+		//If the oldValue is beyond the current limit... truncate it.
+		if (oldDelay == oldValue || oldValue > newDelay)
+		{
+			job->setValue(newDelay);
+		}
+
+		jobChanged(job);
     }
 }
 
