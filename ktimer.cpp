@@ -79,7 +79,7 @@ public:
         QString value=m_job->formatTime(m_job->value());
         QString delay=m_job->formatTime(m_job->delay());
 
-        if (QString::compare(value, delay))
+        if (QString::compare(value, delay) || m_job->state() != KTimerJob::Stopped)
         {
             setText( 0, value );
         }
